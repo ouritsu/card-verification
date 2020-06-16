@@ -1,28 +1,7 @@
-// import * as cardsData from './cardData.json';
-
-// const financialCompaniesObject = {
-//     masterCard: {},
-//     americanExpress: {},
-//     visa: {}
-//   }
-
-// const factory = () => {
-
-//   return {}
-// };
-// const test = factory();
 const input = document.querySelector('input');
 const checkButton = document.querySelector('button');
 
-class CardAttributes {
-  constructor(name, lengths, beginings) {
-    this.name = name;
-    this.suitableLengths = lengths;
-    this.suitableBeginings = beginings;
-  }
-}
-
-const cardsData = { //może popróbować z JSON'em - spróbój z JSONem!!!
+const cardsData = {
   visa: {
     name: 'Visa',
     lengths: [13, 16],
@@ -39,9 +18,6 @@ const cardsData = { //może popróbować z JSON'em - spróbój z JSONem!!!
     beginings: [34, 37]
   }
 }
-
-const visa = new CardAttributes(...Object.values(cardsData.visa));
-const cards = Object.keys(cardsData);
 
 const financialCompaniesObjectName = ['masterCard', 'americanExpress', 'visa'];
 
