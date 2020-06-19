@@ -19,25 +19,24 @@ const cardsData = {
   }
 }
 
-const financialCompaniesObjectName = ['masterCard', 'americanExpress', 'visa'];
+const financialCompaniesObjectName = ['masterCard', 'americanExpress', 'visa']; //program niech wyrzuca prawdziwą nazwę
 
 checkButton.addEventListener('click', checkCardNumber);
 
 function checkCardNumber() {
-  const inputValueToCalculation = prepareInputValueToCalculation();
+  const inputUserNumber = input.value;
+  const inputValueToCalculation = prepareInputValueToCalculation(inputUserNumber);
   const isValidLuhnAlgorithm = checkLuhnAlgorithm(inputValueToCalculation);
-  if (isValidLuhnAlgorithm) {
-
+  const cardCompany = checkCardCompany(inputUserNumber);
+  if (isValidLuhnAlgorithm && cardCompany) {
+    console.log(cardCompany)
   } else {
     invalidInputValue();
   }
-  // 
-  // return isValid;
 }
 
-function prepareInputValueToCalculation() {
-  const inputUserNumber = input.value;
-  const userNumberArrayDigitals = inputUserNumber.match(/[0-9]/g); //array of separated digits
+function prepareInputValueToCalculation(inputUserNumber) {
+  const userNumberArrayDigitals = inputUserNumber.match(/[0-9]/g);
   return userNumberArrayDigitals.reverse();
 }
 
@@ -54,7 +53,6 @@ function checkLuhnAlgorithm(inputValueToCalculation) {
     }
   })
   console.log(sum % 10);
-
   return sum % 10 === 0 ? true : false;
 }
 
@@ -64,5 +62,42 @@ function calculateValueGreaterThan10(value) {
 }
 
 function invalidInputValue() {
+  //Error - create new Error
   console.log('Invalid number, try again!')
+}
+
+function checkCardCompany(cardNumber) {
+  let finalResult = "";
+  for (company of Object.keys(cardsData)) {
+    const lengthCondition = checkLength(cardNumber, company);
+    const beginingCondition = checkBegining(cardNumber, company);
+    if (lengthCondition && beginingCondition) {
+      finalResult = company;
+    }
+  }
+  return finalResult;
+}
+
+function checkLength(cardNumber, company) { //czy da się krócej?
+  let result = false;
+
+  for (const length of cardsData[company].lengths) {
+    if (cardNumber.length === length) {
+      result = true;
+      break;
+    }
+  }
+  return result;
+}
+
+function checkBegining(cardNumber, company) { //czy da się krócej?
+  let result = false;
+
+  for (const firstNumbers of cardsData[company].beginings) {
+    if (cardNumber.startsWith(firstNumbers)) {
+      result = true;
+      break;
+    }
+  }
+  return result;
 }
