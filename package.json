@@ -1,0 +1,20 @@
+{
+  "name": "01_02_weryfikacja-karty",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ouritsu/card-verification.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ouritsu/card-verification/issues"
+  },
+  "homepage": "https://github.com/ouritsu/card-verification#readme"
+}

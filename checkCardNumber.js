@@ -1,35 +1,13 @@
-const input = document.querySelector('input');
-const checkButton = document.querySelector('button');
+import {
+  cardsData
+} from "./cardsData"
 
-const cardsData = {
-  visa: {
-    name: 'Visa',
-    lengths: [13, 16],
-    beginings: [4],
-  },
-  masterCard: {
-    name: 'Master Card',
-    lengths: [16],
-    beginings: [51, 52, 53, 54, 55]
-  },
-  americanExpress: {
-    name: 'American Express',
-    lengths: [15],
-    beginings: [34, 37]
-  }
-}
-
-const financialCompaniesObjectName = ['masterCard', 'americanExpress', 'visa']; //program niech wyrzuca prawdziwą nazwę
-
-checkButton.addEventListener('click', checkCardNumber);
-
-function checkCardNumber() {
-  const inputUserNumber = input.value;
+const checkCardNumber = (inputUserNumber) => {
   const inputValueToCalculation = prepareInputValueToCalculation(inputUserNumber);
   const isValidLuhnAlgorithm = checkLuhnAlgorithm(inputValueToCalculation);
   const cardCompany = checkCardCompany(inputUserNumber);
   if (isValidLuhnAlgorithm && cardCompany) {
-    console.log(cardCompany)
+    return cardCompany;
   } else {
     invalidInputValue();
   }
@@ -43,7 +21,7 @@ function prepareInputValueToCalculation(inputUserNumber) {
 function checkLuhnAlgorithm(inputValueToCalculation) {
   let sum = 0;
 
-  inputValueToCalculation.forEach((number, index) => { //Luhn's algorithm
+  inputValueToCalculation.forEach((number, index) => { //Luhn's algorithm - refactoring reduce ?
     const digit = parseInt(number);
     if (index % 2) {
       let calculateValue = digit * 2
@@ -68,7 +46,7 @@ function invalidInputValue() {
 
 function checkCardCompany(cardNumber) {
   let finalResult = "";
-  for (company of Object.keys(cardsData)) {
+  for (const company of Object.keys(cardsData)) {
     const lengthCondition = checkLength(cardNumber, company);
     const beginingCondition = checkBegining(cardNumber, company);
     if (lengthCondition && beginingCondition) {
@@ -78,7 +56,7 @@ function checkCardCompany(cardNumber) {
   return finalResult;
 }
 
-function checkLength(cardNumber, company) { //czy da się krócej?
+function checkLength(cardNumber, company) { //czy da się krócej? - może predykaty
   let result = false;
 
   for (const length of cardsData[company].lengths) {
@@ -101,3 +79,7 @@ function checkBegining(cardNumber, company) { //czy da się krócej?
   }
   return result;
 }
+
+export {
+  checkCardNumber
+};

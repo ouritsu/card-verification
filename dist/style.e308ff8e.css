@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(42, 42, 42);
+  font-family: Lato;
+  font-weight: 300;
+
+}
+
+input,
+input:active {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  background-color: rgb(42, 42, 42);
+  border: 1px rgb(123, 91, 255) solid;
+  box-shadow: inset 5px 5px 2px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  height: 36px;
+  outline: none;
+  color: white;
+  font-size: 16px;
+  padding-left: 12px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* input:focus {
+  border: 2px rgb(123, 91, 255) solid;
+} */
+
+button {
+  position: absolute;
+  transition: 0.15s;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -250%);
+  background-color: rgb(42, 42, 42);
+  border: 1px rgb(123, 91, 255) solid;
+  color: rgb(123, 91, 255);
+  padding: 10px;
+  width: 200px;
+  height: 36px;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.326) 3px 3px 3px;
+}
+
+button:active {
+  background-color: rgb(123, 91, 255);
+  color: white;
+  transform: translate(calc(-50%+3px), calc(-250%+3px));
+}
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */
