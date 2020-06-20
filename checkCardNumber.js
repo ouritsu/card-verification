@@ -30,7 +30,6 @@ function checkLuhnAlgorithm(inputValueToCalculation) {
       sum += digit;
     }
   })
-  console.log(sum % 10);
   return sum % 10 === 0 ? true : false;
 }
 

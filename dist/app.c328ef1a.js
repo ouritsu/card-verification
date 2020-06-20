@@ -190,7 +190,6 @@ function checkLuhnAlgorithm(inputValueToCalculation) {
       sum += digit;
     }
   });
-  console.log(sum % 10);
   return sum % 10 === 0 ? true : false;
 }
 
@@ -278,13 +277,19 @@ var _checkCardNumber = require("./checkCardNumber");
 
 var input = document.querySelector('input');
 var checkButton = document.querySelector('button');
+var manualWindow = document.querySelector('');
 
 var renderResult = function renderResult() {
   var cardCompany = (0, _checkCardNumber.checkCardNumber)(input.value);
   console.log(cardCompany);
 };
 
+var fadeOutManual = function fadeOutManual() {
+  manualWindow.classList.add('invisible');
+};
+
 checkButton.addEventListener('click', renderResult);
+checkButton.addEventListener('click', fadeOutManual);
 },{"./checkCardNumber":"checkCardNumber.js"}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -313,7 +318,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53444" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51011" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
