@@ -9,23 +9,26 @@ body {
   height: 100vh;
   background-color: rgb(42, 42, 42);
   font-family: 'Lato';
+  color: white;
 }
 
 .app-manual {
   position: absolute;
+  top: 0;
+  left: 0;
   margin: 20px;
   width: 30vw;
   max-width: 360px;
   background-color: rgb(123, 91, 255);
   overflow-wrap: break-word;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.496);
-  animation: shakeInfoBoard .8s infinite;
+  animation: slowShake .8s infinite;
 }
 
 p {
   font-family: monospace;
   padding: 10px;
-  color: white;
+  /* color: white; */
 }
 
 .header-description h2 {
@@ -44,7 +47,7 @@ input:active {
   left: 50vw;
   transform: translate(-50%, -50%);
   background-color: rgb(42, 42, 42);
-  border: 1px rgb(123, 91, 255) solid;
+  border: 1px rgb(22, 22, 22) solid;
   box-shadow: inset 5px 5px 2px rgba(0, 0, 0, 0.2);
   width: 200px;
   height: 36px;
@@ -52,6 +55,7 @@ input:active {
   color: white;
   font-size: 16px;
   padding-left: 12px;
+  color: rgb(123, 91, 255);
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -60,10 +64,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-/* input:focus {
-  border: 2px rgb(123, 91, 255) solid;
-} */
-
 button {
   position: absolute;
   transition: 0.15s;
@@ -71,7 +71,7 @@ button {
   left: 50vw;
   transform: translate(-50%, -250%);
   background-color: rgb(42, 42, 42);
-  border: 1px rgb(123, 91, 255) solid;
+  border: 1px rgb(22, 22, 22) solid;
   color: rgb(123, 91, 255);
   padding: 10px;
   width: 200px;
@@ -86,11 +86,72 @@ button:active {
   transform: translate(calc(-50%+3px), calc(-250%+3px));
 }
 
+.modal-background {
+  width: 100vw;
+  height: 100vh;
+  z-index: 5000;
+}
+
 .invisible {
   display: none;
 }
 
-@keyframes shakeInfoBoard {
+.makeResultWindow {
+  animation: minimalize 1s forwards;
+}
+
+.monochrome-manual {
+  background-color: rgb(50, 50, 50);
+  color: rgb(22, 22, 22);
+  /* color: rgb(100, 100, 100); */
+  transition: .3s;
+}
+
+.result-window {
+  position: absolute;
+  transition: 0.15s;
+  top: 80vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  background-color: rgb(42, 42, 42);
+  border: 1px rgb(22, 22, 22) solid;
+  color: rgb(123, 91, 255);
+  padding: 10px;
+  width: 200px;
+  height: 100px;
+  outline: none;
+  box-shadow: inset 5px 5px 2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 18px;
+  line-height: 80px;
+}
+
+.logo {
+  position: absolute;
+  width: 200px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: rgb(42, 42, 42);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  right: 10px;
+}
+
+.logo-active {
+  left: 50%;
+  transform: translateX(-50%);
+  text-shadow: 1px 1px 0 rgba(124, 91, 255);
+  transition: .3s;
+  /* color: rgba(124, 91, 255, 0.231) */
+}
+
+.colorizeFrames {
+  border: 1px rgb(123, 91, 255) solid;
+  transition: .3s;
+}
+
+@keyframes slowShake {
   0% {
     transform: scale(1);
   }
@@ -104,7 +165,14 @@ button:active {
   }
 }
 
-@media (orientation: portrait) {
+@keyframes minimalize {
+  100% {
+    animation: none;
+    /* transform: translateX(-100vw); */
+  }
+}
+
+@media (max-width: 500px) {
   .app-manual {
     position: absolute;
     width: calc(100vw - 40px);

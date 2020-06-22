@@ -125,20 +125,35 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cardsData = void 0;
 var cardsData = {
-  visa: {
+  'visa': {
     name: 'Visa',
     lengths: [13, 16],
     beginings: [4]
   },
-  masterCard: {
+  'masterCard': {
     name: 'Master Card',
     lengths: [16],
-    beginings: [51, 52, 53, 54, 55]
+    beginings: [22, 51, 52, 53, 54, 55]
   },
-  americanExpress: {
+  'americanExpress': {
     name: 'American Express',
     lengths: [15],
     beginings: [34, 37]
+  },
+  'discover': {
+    name: 'Discover',
+    lengths: [16],
+    beginings: [60]
+  },
+  'dinersClub': {
+    name: 'Diners Club',
+    lengths: [14],
+    beginings: [3]
+  },
+  'jcb': {
+    name: 'JCB',
+    lengths: [16],
+    beginings: [35]
   }
 };
 exports.cardsData = cardsData;
@@ -170,7 +185,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51011" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63500" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

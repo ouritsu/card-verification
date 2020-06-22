@@ -3,11 +3,14 @@ import {
 } from "./cardsData"
 
 const checkCardNumber = (inputUserNumber) => {
+  if (inputUserNumber.length !== 0 && !parseInt(inputUserNumber)) throw new Error('use only digitals!');
+  if (inputUserNumber === '') throw new Error('empty input');
+
   const inputValueToCalculation = prepareInputValueToCalculation(inputUserNumber);
   const isValidLuhnAlgorithm = checkLuhnAlgorithm(inputValueToCalculation);
   const cardCompany = checkCardCompany(inputUserNumber);
   if (isValidLuhnAlgorithm && cardCompany) {
-    return cardCompany;
+    return cardsData[cardCompany].name;
   } else {
     invalidInputValue();
   }
@@ -21,7 +24,7 @@ function prepareInputValueToCalculation(inputUserNumber) {
 function checkLuhnAlgorithm(inputValueToCalculation) {
   let sum = 0;
 
-  inputValueToCalculation.forEach((number, index) => { //Luhn's algorithm - refactoring reduce ?
+  inputValueToCalculation.forEach((number, index) => {
     const digit = parseInt(number);
     if (index % 2) {
       let calculateValue = digit * 2
@@ -39,8 +42,7 @@ function calculateValueGreaterThan10(value) {
 }
 
 function invalidInputValue() {
-  //Error - create new Error
-  console.log('Invalid number, try again!')
+  throw new Error('invalid card number!');
 }
 
 function checkCardCompany(cardNumber) {
@@ -55,7 +57,7 @@ function checkCardCompany(cardNumber) {
   return finalResult;
 }
 
-function checkLength(cardNumber, company) { //czy da się krócej? - może predykaty
+function checkLength(cardNumber, company) {
   let result = false;
 
   for (const length of cardsData[company].lengths) {
@@ -67,7 +69,7 @@ function checkLength(cardNumber, company) { //czy da się krócej? - może predy
   return result;
 }
 
-function checkBegining(cardNumber, company) { //czy da się krócej?
+function checkBegining(cardNumber, company) {
   let result = false;
 
   for (const firstNumbers of cardsData[company].beginings) {

@@ -13,14 +13,17 @@
 
 <body>
   <header>
+    <div class="logo">numcheck</div>
     <div class="app-manual">
-      <p>Hi! This is a simple application to verify the debit card number and check its company. To verify the card,
-        just enter the number from the card and... "CLICK." Simple! isn't it?!</p>
+      <p>Hi! Numcheck is a simple application to verify debit card number and check its company. To verify the card,
+        just type the number from the card and... "CLICK." Simple! isn't it?!</p>
     </div>
   </header>
-  <input type="number" maxlength="16" class="card-input" value="4012888888881881"> <!-- 5193080150954111 -->
-  <button class="check-number">CLICK!</button>
-
+  <main>
+    <input type="number" maxlength="16" class="card-input"> <!-- 5193080150954111 -->
+    <button class="check-number">CLICK!</button>
+    <div class="result-window"></div>
+  </main>
   <script type="text/javascript" src="/app.js"></script>
   <script type="text/javascript" src="/cardsData.js"></script>
   <script type="text/javascript" src="/checkCardNumber.js"></script>

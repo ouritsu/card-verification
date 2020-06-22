@@ -125,20 +125,35 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cardsData = void 0;
 var cardsData = {
-  visa: {
+  'visa': {
     name: 'Visa',
     lengths: [13, 16],
     beginings: [4]
   },
-  masterCard: {
+  'masterCard': {
     name: 'Master Card',
     lengths: [16],
-    beginings: [51, 52, 53, 54, 55]
+    beginings: [22, 51, 52, 53, 54, 55]
   },
-  americanExpress: {
+  'americanExpress': {
     name: 'American Express',
     lengths: [15],
     beginings: [34, 37]
+  },
+  'discover': {
+    name: 'Discover',
+    lengths: [16],
+    beginings: [60]
+  },
+  'dinersClub': {
+    name: 'Diners Club',
+    lengths: [14],
+    beginings: [3]
+  },
+  'jcb': {
+    name: 'JCB',
+    lengths: [16],
+    beginings: [35]
   }
 };
 exports.cardsData = cardsData;
@@ -159,12 +174,15 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var checkCardNumber = function checkCardNumber(inputUserNumber) {
+  if (inputUserNumber.length !== 0 && !parseInt(inputUserNumber)) throw new Error('use only digitals!');
+  if (inputUserNumber === '') throw new Error('empty input'); // if (!new RegExp(/^[a-zA-Z0-9/?]*$/g).test(inputStartWord)) throw new Error('invalid chars');
+
   var inputValueToCalculation = prepareInputValueToCalculation(inputUserNumber);
   var isValidLuhnAlgorithm = checkLuhnAlgorithm(inputValueToCalculation);
   var cardCompany = checkCardCompany(inputUserNumber);
 
   if (isValidLuhnAlgorithm && cardCompany) {
-    return cardCompany;
+    return _cardsData.cardsData[cardCompany].name;
   } else {
     invalidInputValue();
   }
@@ -180,7 +198,6 @@ function prepareInputValueToCalculation(inputUserNumber) {
 function checkLuhnAlgorithm(inputValueToCalculation) {
   var sum = 0;
   inputValueToCalculation.forEach(function (number, index) {
-    //Luhn's algorithm - refactoring reduce ?
     var digit = parseInt(number);
 
     if (index % 2) {
@@ -201,8 +218,7 @@ function calculateValueGreaterThan10(value) {
 }
 
 function invalidInputValue() {
-  //Error - create new Error
-  console.log('Invalid number, try again!');
+  throw new Error('invalid card number!');
 }
 
 function checkCardCompany(cardNumber) {
@@ -222,7 +238,6 @@ function checkCardCompany(cardNumber) {
 }
 
 function checkLength(cardNumber, company) {
-  //czy da się krócej? - może predykaty
   var result = false;
 
   var _iterator = _createForOfIteratorHelper(_cardsData.cardsData[company].lengths),
@@ -247,7 +262,6 @@ function checkLength(cardNumber, company) {
 }
 
 function checkBegining(cardNumber, company) {
-  //czy da się krócej?
   var result = false;
 
   var _iterator2 = _createForOfIteratorHelper(_cardsData.cardsData[company].beginings),
@@ -276,20 +290,42 @@ function checkBegining(cardNumber, company) {
 var _checkCardNumber = require("./checkCardNumber");
 
 var input = document.querySelector('input');
+var logo = document.querySelector('.logo');
 var checkButton = document.querySelector('button');
-var manualWindow = document.querySelector('');
+var manualWindow = document.querySelector('.app-manual');
+var finalResultWindow = document.querySelector('.result-window');
 
 var renderResult = function renderResult() {
-  var cardCompany = (0, _checkCardNumber.checkCardNumber)(input.value);
-  console.log(cardCompany);
+  try {
+    var cardCompany = (0, _checkCardNumber.checkCardNumber)(input.value);
+    finalResultWindow.innerText = cardCompany;
+    console.log(cardCompany);
+  } catch (error) {
+    finalResultWindow.innerText = error.message;
+  }
 };
 
-var fadeOutManual = function fadeOutManual() {
-  manualWindow.classList.add('invisible');
+var appVisualEffects = function appVisualEffects() {
+  manualWindow.classList.add('makeResultWindow');
+  manualWindow.classList.add('monochrome-manual');
+  finalResultWindow.classList.add('colorizeFrames');
+  checkButton.classList.add('colorizeFrames');
+  logo.classList.add('logo-active');
+  input.classList.add('colorizeFrames');
+};
+
+var manualVisualEffects = function manualVisualEffects() {
+  manualWindow.classList.remove('makeResultWindow');
+  manualWindow.classList.remove('monochrome-manual');
+  finalResultWindow.classList.remove('colorizeFrames');
+  checkButton.classList.remove('colorizeFrames');
+  logo.classList.remove('logo-active');
+  input.classList.remove('colorizeFrames');
 };
 
 checkButton.addEventListener('click', renderResult);
-checkButton.addEventListener('click', fadeOutManual);
+checkButton.addEventListener('click', appVisualEffects);
+manualWindow.addEventListener('click', manualVisualEffects);
 },{"./checkCardNumber":"checkCardNumber.js"}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -318,7 +354,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51011" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63500" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
