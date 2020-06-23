@@ -117,173 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"cardsData.js":[function(require,module,exports) {
-"use strict";
+})({"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.cardsData = void 0;
-var cardsData = {
-  'visa': {
-    name: 'Visa',
-    lengths: [13, 16],
-    beginings: [4]
-  },
-  'masterCard': {
-    name: 'Master Card',
-    lengths: [16],
-    beginings: [22, 51, 52, 53, 54, 55]
-  },
-  'americanExpress': {
-    name: 'American Express',
-    lengths: [15],
-    beginings: [34, 37]
-  },
-  'discover': {
-    name: 'Discover',
-    lengths: [16],
-    beginings: [60]
-  },
-  'dinersClub': {
-    name: 'Diners Club',
-    lengths: [14],
-    beginings: [3]
-  },
-  'jcb': {
-    name: 'JCB',
-    lengths: [16],
-    beginings: [35]
-  }
-};
-exports.cardsData = cardsData;
-},{}],"checkCardNumber.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.checkCardNumber = void 0;
-
-var _cardsData = require("./cardsData");
-
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-var checkCardNumber = function checkCardNumber(inputUserNumber) {
-  if (inputUserNumber.length !== 0 && !parseInt(inputUserNumber)) throw new Error('use only digitals!');
-  if (inputUserNumber === '') throw new Error('empty input');
-  var inputValueToCalculation = prepareInputValueToCalculation(inputUserNumber);
-  var isValidLuhnAlgorithm = checkLuhnAlgorithm(inputValueToCalculation);
-  var cardCompany = checkCardCompany(inputUserNumber);
-
-  if (isValidLuhnAlgorithm && cardCompany) {
-    return _cardsData.cardsData[cardCompany].name;
-  } else {
-    invalidInputValue();
-  }
-};
-
-exports.checkCardNumber = checkCardNumber;
-
-function prepareInputValueToCalculation(inputUserNumber) {
-  var userNumberArrayDigitals = inputUserNumber.match(/[0-9]/g);
-  return userNumberArrayDigitals.reverse();
-}
-
-function checkLuhnAlgorithm(inputValueToCalculation) {
-  var sum = 0;
-  inputValueToCalculation.forEach(function (number, index) {
-    var digit = parseInt(number);
-
-    if (index % 2) {
-      var calculateValue = digit * 2;
-      sum += calculateValue < 10 ? calculateValue : calculateValueGreaterThan10(calculateValue);
-    } else {
-      sum += digit;
-    }
-  });
-  return sum % 10 === 0 ? true : false;
-}
-
-function calculateValueGreaterThan10(value) {
-  var separateDigits = String(value).split('');
-  return separateDigits.reduce(function (sum, nextDigit) {
-    return sum + parseInt(nextDigit);
-  }, 0);
-}
-
-function invalidInputValue() {
-  throw new Error('invalid card number!');
-}
-
-function checkCardCompany(cardNumber) {
-  var finalResult = "";
-
-  for (var _i = 0, _Object$keys = Object.keys(_cardsData.cardsData); _i < _Object$keys.length; _i++) {
-    var company = _Object$keys[_i];
-    var lengthCondition = checkLength(cardNumber, company);
-    var beginingCondition = checkBegining(cardNumber, company);
-
-    if (lengthCondition && beginingCondition) {
-      finalResult = company;
-    }
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  return finalResult;
+  return bundleURL;
 }
 
-function checkLength(cardNumber, company) {
-  var result = false;
-
-  var _iterator = _createForOfIteratorHelper(_cardsData.cardsData[company].lengths),
-      _step;
-
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var length = _step.value;
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
 
-      if (cardNumber.length === length) {
-        result = true;
-        break;
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
       }
     }
-  } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
-  }
 
-  return result;
+    cssTimeout = null;
+  }, 50);
 }
 
-function checkBegining(cardNumber, company) {
-  var result = false;
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"css/style.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
 
-  var _iterator2 = _createForOfIteratorHelper(_cardsData.cardsData[company].beginings),
-      _step2;
-
-  try {
-    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-      var firstNumbers = _step2.value;
-
-      if (cardNumber.startsWith(firstNumbers)) {
-        result = true;
-        break;
-      }
-    }
-  } catch (err) {
-    _iterator2.e(err);
-  } finally {
-    _iterator2.f();
-  }
-
-  return result;
-}
-},{"./cardsData":"cardsData.js"}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -487,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","checkCardNumber.js"], null)
-//# sourceMappingURL=/checkCardNumber.682a5a17.js.map
+},{}]},{},["../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/style.78032849.js.map

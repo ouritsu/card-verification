@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"cardsData.js":[function(require,module,exports) {
+})({"js/cardsData.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -157,7 +157,7 @@ var cardsData = {
   }
 };
 exports.cardsData = cardsData;
-},{}],"checkCardNumber.js":[function(require,module,exports) {
+},{}],"js/checkCardNumber.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -283,7 +283,7 @@ function checkBegining(cardNumber, company) {
 
   return result;
 }
-},{"./cardsData":"cardsData.js"}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./cardsData":"js/cardsData.js"}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -487,5 +487,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","checkCardNumber.js"], null)
-//# sourceMappingURL=/checkCardNumber.682a5a17.js.map
+},{}]},{},["../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/checkCardNumber.js"], null)
+//# sourceMappingURL=/checkCardNumber.5f66dae4.js.map

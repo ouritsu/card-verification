@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"cardsData.js":[function(require,module,exports) {
+})({"js/cardsData.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -157,7 +157,7 @@ var cardsData = {
   }
 };
 exports.cardsData = cardsData;
-},{}],"checkCardNumber.js":[function(require,module,exports) {
+},{}],"js/checkCardNumber.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -283,7 +283,49 @@ function checkBegining(cardNumber, company) {
 
   return result;
 }
-},{"./cardsData":"cardsData.js"}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./cardsData":"js/cardsData.js"}],"js/app.js":[function(require,module,exports) {
+"use strict";
+
+var _checkCardNumber = require("./checkCardNumber");
+
+var input = document.querySelector('input');
+var logo = document.querySelector('.logo');
+var checkButton = document.querySelector('button');
+var manualWindow = document.querySelector('.app-manual');
+var finalResultWindow = document.querySelector('.result-window');
+
+var renderResult = function renderResult() {
+  try {
+    var cardCompany = (0, _checkCardNumber.checkCardNumber)(input.value);
+    finalResultWindow.innerText = cardCompany;
+    console.log(cardCompany);
+  } catch (error) {
+    finalResultWindow.innerText = error.message;
+  }
+};
+
+var appVisualEffects = function appVisualEffects() {
+  manualWindow.classList.add('makeResultWindow');
+  manualWindow.classList.add('monochrome-manual');
+  finalResultWindow.classList.add('colorizeFrames');
+  checkButton.classList.add('colorizeFrames');
+  logo.classList.add('logo-active');
+  input.classList.add('colorizeFrames');
+};
+
+var manualVisualEffects = function manualVisualEffects() {
+  manualWindow.classList.remove('makeResultWindow');
+  manualWindow.classList.remove('monochrome-manual');
+  finalResultWindow.classList.remove('colorizeFrames');
+  checkButton.classList.remove('colorizeFrames');
+  logo.classList.remove('logo-active');
+  input.classList.remove('colorizeFrames');
+};
+
+checkButton.addEventListener('click', renderResult);
+checkButton.addEventListener('click', appVisualEffects);
+manualWindow.addEventListener('click', manualVisualEffects);
+},{"./checkCardNumber":"js/checkCardNumber.js"}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -487,5 +529,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","checkCardNumber.js"], null)
-//# sourceMappingURL=/checkCardNumber.682a5a17.js.map
+},{}]},{},["../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
+//# sourceMappingURL=/app.c3f9f951.js.map
