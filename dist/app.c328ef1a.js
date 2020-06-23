@@ -175,8 +175,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var checkCardNumber = function checkCardNumber(inputUserNumber) {
   if (inputUserNumber.length !== 0 && !parseInt(inputUserNumber)) throw new Error('use only digitals!');
-  if (inputUserNumber === '') throw new Error('empty input'); // if (!new RegExp(/^[a-zA-Z0-9/?]*$/g).test(inputStartWord)) throw new Error('invalid chars');
-
+  if (inputUserNumber === '') throw new Error('empty input');
   var inputValueToCalculation = prepareInputValueToCalculation(inputUserNumber);
   var isValidLuhnAlgorithm = checkLuhnAlgorithm(inputValueToCalculation);
   var cardCompany = checkCardCompany(inputUserNumber);
